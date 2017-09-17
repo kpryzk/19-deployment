@@ -13,4 +13,8 @@ addons:
 env:
   - CXX=g++-4.8
 sudo: required
+branches:
+  only:
+  - gh-pages
+  - /.*/
 before_script: npm i
