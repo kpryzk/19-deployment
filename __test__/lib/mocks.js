@@ -10,7 +10,7 @@ mocks.gallery = {}
 
 mocks.user.createOne = function() {
   this.result = {}
-  result.password = faker.internet.password()
+  this.result.password = faker.internet.password()
 
   let user = new User({
     username: faker.internet.userName(),
@@ -18,31 +18,31 @@ mocks.user.createOne = function() {
   })
 
   return user.generatePasswordHash(this.result.password)
-  .then(user => {
-    this.result.user = user
-    return user.save()
-  })
-  .then(user => user.generateToken())
-  .then(token => {
-    this.result.token = token
-    return this.result
-  })
+    .then(user => {
+      this.result.user = user
+      return user.save()
+    })
+    .then(user => user.generateToken())
+    .then(token => {
+      this.result.token = token
+      return this.result
+    })
 }
 
 mocks.gallery.createOne = function() {
   return mocks.user.createOne()
-  .then(userData => this.result = userData)
-  .then(userData => {
-    return new Gallery({
-      name: faker.internet.domainWord(),
-      desc: faker.random.words(12),
-      userId: userData.user._id
-    }).save()
-  })
-  .then(gallery => {
-    this.result.gallery = gallery
-    return this.result
-  })
+    .then(userData => this.result = userData)
+    .then(userData => {
+      return new Gallery({
+        name: faker.internet.domainWord(),
+        desc: faker.random.words(12),
+        userId: userData.user._id
+      }).save()
+    })
+    .then(gallery => {
+      this.result.gallery = gallery
+      return this.result
+    })
 }
 
 mocks.gallery.removeAll = function() {
