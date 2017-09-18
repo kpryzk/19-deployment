@@ -14,7 +14,7 @@ mocks.user.createOne = function() {
 
   let user = new User({
     username: faker.internet.userName(),
-    email: faker.internet.email(),
+    email: faker.internet.email()
   })
 
   return user.generatePasswordHash(this.result.password)
@@ -36,7 +36,7 @@ mocks.gallery.createOne = function() {
       return new Gallery({
         name: faker.internet.domainWord(),
         desc: faker.random.words(12),
-        userId: userData.user._id,
+        userId: userData.user._id
       }).save()
     })
     .then(gallery => {
@@ -45,18 +45,13 @@ mocks.gallery.createOne = function() {
     })
 }
 
-mocks.photo.removeAll = function() {
-  return Promise.all([
-    Gallery.remove(),
-  ])
-}
 mocks.gallery.removeAll = function() {
   return Promise.all([
-    Gallery.remove(),
+    Gallery.remove()
   ])
 }
 mocks.user.removeAll = function() {
   return Promise.all([
-    User.remove(),
+    User.remove()
   ])
 }
